@@ -6,7 +6,7 @@ const noteSchema = mongoose.Schema({
   comments: { type: [String], default: [] },
   createdAt: {
     type: Date,
-    default: new Date(),
+    default: Date.now,
   },
   approved: {
     type: Boolean,

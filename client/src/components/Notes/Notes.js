@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 
 import Note from "./Note/Note";
 
-const Notes = (note) => {
+const Notes = () => {
   const notes = useSelector((state) => state.notes);
 
   return (
