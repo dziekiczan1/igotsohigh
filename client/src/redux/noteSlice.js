@@ -45,6 +45,7 @@ export const noteSlice = createSlice({
   reducers: {
     fetchAllNotes: (state, action) => {
       return action.payload;
+      console.log(state);
     },
     create: (state, action) => {
       return [...state, action.payload];
