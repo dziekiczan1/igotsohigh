@@ -4,12 +4,16 @@ import mongoose from "mongoose";
 import cors from "cors";
 import dotenv from "dotenv";
 
+import noteRoutes from "./routes/notes.js";
+
 const app = express();
 dotenv.config({ path: ".env.development.local" });
 
 app.use(bodyParser.json({ extended: true }));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
+
+app.use("/notes", noteRoutes);
 
 app.get("/", (req, res) => {
   res.send("Its working");
