@@ -21,7 +21,7 @@ const App = () => {
 
   useEffect(() => {
     dispatch(getNotes());
-  }, [dispatch]);
+  }, [currentId, dispatch]);
 
   return (
     <ThemeProvider theme={darkTheme}>

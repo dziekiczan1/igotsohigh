@@ -7,7 +7,7 @@ import "./styles.css";
 const Note = ({ note, setCurrentId }) => {
   return (
     <>
-      <div className="noteCard">
+      <div className="noteCard" key={note._id}>
         <p>{moment(note.createdAt).fromNow()}</p>
         <p>{note.creator}</p>
         <p>{note.message}</p>

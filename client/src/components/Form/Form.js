@@ -31,6 +31,7 @@ const Form = ({ currentId, setCurrentId }) => {
     clear();
   };
   const clear = () => {
+    setCurrentId(null);
     setNoteData({
       creator: "",
       message: "",
@@ -38,6 +39,7 @@ const Form = ({ currentId, setCurrentId }) => {
   };
   return (
     <div>
+      <h1>{currentId ? "Editing" : "Creating"} a Note</h1>
       <Box
         component="form"
         sx={{

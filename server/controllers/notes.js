@@ -28,9 +28,13 @@ export const updateNote = async (req, res) => {
   if (!mongoose.Types.ObjectId.isValid(_id))
     return res.status(404).send("No notes with that id"); // we check if the _id is monggose object id
 
-  const updatedNote = await NoteMessage.findByIdAndUpdate(_id, note, {
-    new: true,
-  }); // we update data to NoteMessage by passing _id and note
+  const updatedNote = await NoteMessage.findByIdAndUpdate(
+    _id,
+    { ...note, _id },
+    {
+      new: true,
+    }
+  ); // we update data to NoteMessage by passing _id and note
 
   res.json(updatedNote);
 };
