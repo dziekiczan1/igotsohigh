@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 
 import Note from "./Note/Note";
 
-const Notes = () => {
+const Notes = ({ setCurrentId }) => {
   const notes = useSelector((state) => state.notes);
 
   return (
@@ -14,7 +14,7 @@ const Notes = () => {
         notes.map((note) => {
           return (
             <div key={note._id}>
-              <Note note={note} />
+              <Note note={note} setCurrentId={setCurrentId} />
             </div>
           );
         })
