@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Container, AppBar, Typography, Grow, Grid } from "@mui/material";
 import { useDispatch } from "react-redux";
@@ -16,6 +16,7 @@ const darkTheme = createTheme({
 });
 
 const App = () => {
+  const [currentId, setCurrentId] = useState();
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -35,10 +36,10 @@ const App = () => {
           <Container>
             <Grid container justify="space-between" spacing={3}>
               <Grid item xs={12} sm={7}>
-                <Notes />
+                <Notes setCurrentId={setCurrentId} />
               </Grid>
               <Grid item xs={12} sm={4}>
-                <Form />
+                <Form currentId={currentId} setCurrentId={setCurrentId} />
               </Grid>
             </Grid>
           </Container>

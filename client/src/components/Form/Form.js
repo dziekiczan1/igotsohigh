@@ -1,25 +1,37 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button, TextField, Box } from "@mui/material";
-import { useDispatch } from "react-redux";
-import { createNote } from "../../redux/noteSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { createNote, updateNote } from "../../redux/noteSlice";
 
 import "./styles.css";
 
-const Form = () => {
-  const [postData, setPostData] = useState({
+const Form = ({ currentId, setCurrentId }) => {
+  const note = useSelector((state) =>
+    currentId ? state.notes.find((note) => note._id === currentId) : null
+  ); // if we have currentId we want to find a note with the same id as currentId
+  const [noteData, setNoteData] = useState({
     creator: "",
     message: "",
   });
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    if (note) setNoteData(note);
+  }, [note]); // when the note value changes we want to run this callback function inside useeffect
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    dispatch(createNote(postData));
+    if (currentId) {
+      dispatch(updateNote(currentId, noteData));
+    } else {
+      dispatch(createNote(noteData));
+    }
+
     clear();
   };
   const clear = () => {
-    setPostData({
+    setNoteData({
       creator: "",
       message: "",
     });
@@ -43,9 +55,9 @@ const Form = () => {
           label="Creator"
           fullWidth
           variant="outlined"
-          value={postData.creator}
+          value={noteData.creator}
           onChange={(e) =>
-            setPostData({ ...postData, creator: e.target.value })
+            setNoteData({ ...noteData, creator: e.target.value })
           }
         />
         <TextField
@@ -55,9 +67,9 @@ const Form = () => {
           label="Message"
           fullWidth
           variant="outlined"
-          value={postData.message}
+          value={noteData.message}
           onChange={(e) =>
-            setPostData({ ...postData, message: e.target.value })
+            setNoteData({ ...noteData, message: e.target.value })
           }
         />
 
