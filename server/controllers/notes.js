@@ -1,3 +1,4 @@
+import mongoose from "mongoose";
 import NoteMessage from "../models/noteMessage.js";
 
 export const getNotes = async (req, res) => {
@@ -12,11 +13,24 @@ export const getNotes = async (req, res) => {
 export const createNote = async (req, res) => {
   const note = req.body;
   const newNote = new NoteMessage(note);
-  console.log(newNote);
   try {
     await newNote.save();
     res.status(201).json(newNote);
   } catch (error) {
     res.status(409).json({ message: error.message });
   }
+};
+
+export const updateNote = async (req, res) => {
+  const { id: _id } = req.params; // we get the id from params and we rename it to _id
+  const note = req.body; // we get updated note here
+
+  if (!mongoose.Types.ObjectId.isValid(_id))
+    return res.status(404).send("No notes with that id"); // we check if the _id is monggose object id
+
+  const updatedNote = await NoteMessage.findByIdAndUpdate(_id, note, {
+    new: true,
+  }); // we update data to NoteMessage by passing _id and note
+
+  res.json(updatedNote);
 };
