@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { Grid } from "@mui/material";
+import { Container, Col, Row } from "react-bootstrap";
 
 import Note from "./Note/Note";
 
@@ -14,9 +14,13 @@ const Notes = ({ setCurrentId }) => {
       ) : (
         notes.map((note, i) => {
           return (
-            <Grid item xs={12} key={i}>
-              <Note note={note} setCurrentId={setCurrentId} />
-            </Grid>
+            <Container key={i} className="p-1">
+              <Row className="m-2">
+                <Col>
+                  <Note note={note} setCurrentId={setCurrentId} />
+                </Col>
+              </Row>
+            </Container>
           );
         })
       )}
