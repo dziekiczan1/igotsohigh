@@ -12,9 +12,9 @@ const Notes = ({ setCurrentId }) => {
       {!notes.length ? (
         <div>There is nothing to show</div>
       ) : (
-        notes.map((note) => {
+        notes.map((note, i) => {
           return (
-            <Grid item xs={12}>
+            <Grid item xs={12} key={i}>
               <Note note={note} setCurrentId={setCurrentId} />
             </Grid>
           );
