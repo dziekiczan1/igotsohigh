@@ -1,8 +1,15 @@
 .navbarBrandName {
-  color: #fff;
+  color: #0dac3d;
   text-decoration: none;
+  // font-family: "Poppins", sans-serif;
+  font-family: "Amatic SC", cursive;
+  font-size: 3.5rem;
+  font-weight: 700;
 
   &:hover {
     text-decoration: none;
+  }
+  @media screen and (max-width: 460px) {
+    font-size: 2.2rem;
   }
 }

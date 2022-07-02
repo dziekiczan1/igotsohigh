@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Container, Navbar, Nav } from "react-bootstrap";
 
-import logo from "../../images/logo.png";
 import "./styles.scss";
 
 const Navigationbar = () => {
@@ -14,7 +13,7 @@ const Navigationbar = () => {
       variant="dark"
       className="p-3"
     >
-      <Container>
+      <Container className="p-0">
         <Navbar.Brand>
           <Link
             to="/"

@@ -1,9 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { Box, TextField, Button } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import { createNote, updateNote } from "../../redux/noteSlice";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
 
 import "./styles.scss";
+import { createNote, updateNote } from "../../redux/noteSlice";
+
+const Theme = createTheme({
+  palette: {
+    mode: "dark",
+  },
+});
 
 const Forma = ({ currentId, setCurrentId }) => {
   const note = useSelector((state) =>
@@ -38,43 +45,49 @@ const Forma = ({ currentId, setCurrentId }) => {
     });
   };
   return (
-    <Box
-      component="form"
-      noValidate
-      fullWidth
-      autoComplete="off"
-      onSubmit={handleSubmit}
-    >
-      <TextField
-        className="textfield"
-        sx={{ margin: "1rem 0" }}
-        name="creator"
-        label="Creator"
+    <ThemeProvider theme={Theme}>
+      <Box
+        component="form"
+        noValidate
         fullWidth
-        variant="outlined"
-        multiline
-        value={noteData.creator}
-        onChange={(e) => setNoteData({ ...noteData, creator: e.target.value })}
-      />
-      <TextField
-        className="textfield"
-        name="message"
-        label="Message"
-        fullWidth
-        variant="outlined"
-        multiline
-        rows={4}
-        value={noteData.message}
-        onChange={(e) => setNoteData({ ...noteData, message: e.target.value })}
-      />
+        autoComplete="off"
+        onSubmit={handleSubmit}
+      >
+        <TextField
+          className="textfield"
+          sx={{ margin: "1rem 0" }}
+          name="creator"
+          label="Creator"
+          fullWidth
+          variant="outlined"
+          multiline
+          value={noteData.creator}
+          onChange={(e) =>
+            setNoteData({ ...noteData, creator: e.target.value })
+          }
+        />
+        <TextField
+          className="textfield"
+          name="message"
+          label="Message"
+          fullWidth
+          variant="outlined"
+          multiline
+          rows={4}
+          value={noteData.message}
+          onChange={(e) =>
+            setNoteData({ ...noteData, message: e.target.value })
+          }
+        />
 
-      <Button size="large" type="submit" fullWidth>
-        Submit
-      </Button>
-      <Button size="large" onClick={clear} fullWidth>
-        Clear
-      </Button>
-    </Box>
+        <Button size="large" type="submit" fullWidth>
+          Submit
+        </Button>
+        <Button size="large" onClick={clear} fullWidth>
+          Clear
+        </Button>
+      </Box>
+    </ThemeProvider>
   );
 };
 

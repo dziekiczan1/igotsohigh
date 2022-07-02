@@ -4,7 +4,7 @@ import { Container, Col, Row } from "react-bootstrap";
 
 import Note from "./Note/Note";
 
-const Notes = ({ setCurrentId }) => {
+const Notes = ({ setCurrentId, handleShow }) => {
   const notes = useSelector((state) => state.notes);
 
   return (
@@ -17,7 +17,11 @@ const Notes = ({ setCurrentId }) => {
             <Container key={i} className="p-1">
               <Row className="m-2">
                 <Col>
-                  <Note note={note} setCurrentId={setCurrentId} />
+                  <Note
+                    note={note}
+                    setCurrentId={setCurrentId}
+                    handleShow={handleShow}
+                  />
                 </Col>
               </Row>
             </Container>

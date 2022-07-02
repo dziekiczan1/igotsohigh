@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { Col, Row, Button, Offcanvas, Container, Card } from "react-bootstrap";
+import { Col, Row, Button, Offcanvas, Card } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 
 import { getNotes } from "../../redux/noteSlice";
 import Notes from "../Notes/Notes";
 import Forma from "../Form/Form";
+import Auth from "../Auth/Auth";
 import "./Home.scss";
 
 const Home = () => {
@@ -20,37 +21,35 @@ const Home = () => {
   }, [currentId, dispatch]);
 
   return (
-    <Row>
-      <Col sm={8}>
-        <Notes setCurrentId={setCurrentId} />
+    <Row className="p-0">
+      <Col sm={8} className="p-1">
+        <Notes setCurrentId={setCurrentId} handleShow={handleShow} />
       </Col>
-      <Col sm={4}>
-        <Container className="p-1">
-          <Row className="m-2">
-            <Col>
-              <Card bg="dark" text="white" border="warning">
-                <Card.Body className="sidebar">
-                  <Button
-                    variant="success"
-                    size="lg"
-                    onClick={handleShow}
-                    className="button"
-                  >
-                    Launch
-                  </Button>
-                </Card.Body>
-              </Card>
-            </Col>
-          </Row>
-        </Container>
+      <Col sm={4} className="p-1">
+        <Col>
+          <Card bg="dark" text="white" border="none">
+            <Card.Body className="m-2 py-0 sidebar">
+              <Button
+                variant="outline-success"
+                size="lg"
+                onClick={handleShow}
+                className="button"
+              >
+                Share a weed story!
+              </Button>
+            </Card.Body>
+          </Card>
+        </Col>
+        <Auth />
         <Offcanvas
           show={show}
           onHide={handleClose}
           placement="end"
           scroll={true}
+          className="bg-dark"
         >
-          <Offcanvas.Header closeButton>
-            <Offcanvas.Title>
+          <Offcanvas.Header closeButton className="bg-success">
+            <Offcanvas.Title className="text-white">
               {currentId ? "Editing" : "Creating"} a Note
             </Offcanvas.Title>
           </Offcanvas.Header>
