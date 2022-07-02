@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { Button, TextField, Box } from "@mui/material";
+import { Box, TextField, Button } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { createNote, updateNote } from "../../redux/noteSlice";
 
-import "./styles.css";
+import "./styles.scss";
 
-const Form = ({ currentId, setCurrentId }) => {
+const Forma = ({ currentId, setCurrentId }) => {
   const note = useSelector((state) =>
     currentId ? state.notes.find((note) => note._id === currentId) : null
   ); // if we have currentId we want to find a note with the same id as currentId
@@ -38,52 +38,44 @@ const Form = ({ currentId, setCurrentId }) => {
     });
   };
   return (
-    <div>
-      <h1>{currentId ? "Editing" : "Creating"} a Note</h1>
-      <Box
-        component="form"
-        sx={{
-          "& .MuiTextField-root": { m: 1 },
-        }}
-        noValidate
+    <Box
+      component="form"
+      noValidate
+      fullWidth
+      autoComplete="off"
+      onSubmit={handleSubmit}
+    >
+      <TextField
+        className="textfield"
+        sx={{ margin: "1rem 0" }}
+        name="creator"
+        label="Creator"
         fullWidth
-        autoComplete="off"
-        onSubmit={handleSubmit}
-      >
-        <TextField
-          className="textfield"
-          sx={{ input: { color: "white" } }}
-          name="creator"
-          label="Creator"
-          fullWidth
-          variant="outlined"
-          value={noteData.creator}
-          onChange={(e) =>
-            setNoteData({ ...noteData, creator: e.target.value })
-          }
-        />
-        <TextField
-          className="textfield"
-          sx={{ input: { color: "red" } }}
-          name="message"
-          label="Message"
-          fullWidth
-          variant="outlined"
-          value={noteData.message}
-          onChange={(e) =>
-            setNoteData({ ...noteData, message: e.target.value })
-          }
-        />
+        variant="outlined"
+        multiline
+        value={noteData.creator}
+        onChange={(e) => setNoteData({ ...noteData, creator: e.target.value })}
+      />
+      <TextField
+        className="textfield"
+        name="message"
+        label="Message"
+        fullWidth
+        variant="outlined"
+        multiline
+        rows={4}
+        value={noteData.message}
+        onChange={(e) => setNoteData({ ...noteData, message: e.target.value })}
+      />
 
-        <Button size="large" type="submit" fullWidth>
-          Submit
-        </Button>
-        <Button size="large" onClick={clear} fullWidth>
-          Clear
-        </Button>
-      </Box>
-    </div>
+      <Button size="large" type="submit" fullWidth>
+        Submit
+      </Button>
+      <Button size="large" onClick={clear} fullWidth>
+        Clear
+      </Button>
+    </Box>
   );
 };
 
-export default Form;
+export default Forma;

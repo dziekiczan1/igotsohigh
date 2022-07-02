@@ -11,14 +11,14 @@ const Note = ({ note, setCurrentId }) => {
   const dispatch = useDispatch();
   return (
     <>
-      <Card bg="light" text="dark" border="dark">
+      <Card bg="success" text="white" border="warning">
         <Card.Header className="d-flex">
           by <strong className="me-auto">{note.creator}</strong>
           <small>{moment(note.createdAt).fromNow()}</small>
         </Card.Header>
         <Card.Body>
           <Card.Title>I got so high that...</Card.Title>
-          <Card.Text>{note.message.substring(0, 3)}...</Card.Text>
+          <Card.Text>{note.message}</Card.Text>
           <div className="klasa">
             <Button size="sm" onClick={() => setCurrentId(note._id)}>
               Details

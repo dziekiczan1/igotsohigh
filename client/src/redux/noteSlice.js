@@ -45,21 +45,6 @@ export const deleteNote = (id) => async (dispatch) => {
 export const noteSlice = createSlice({
   name: "notes",
   initialState: [],
-  // extraReducers: (builder) => {
-  //   builder.addCase(fetchPosts.pending, (state) => {
-  //     state.loading = true;
-  //   });
-  //   builder.addCase(fetchPosts.fulfilled, (state, action) => {
-  //     state.loading = false;
-  //     state.postcontent = action.payload;
-  //     state.error = "";
-  //   });
-  //   builder.addCase(fetchPosts.rejected, (state, action) => {
-  //     state.loading = false;
-  //     state.postcontent = [];
-  //     state.error = action.error.message;
-  //   });
-  // },
   reducers: {
     fetchAllNotes: (state, action) => {
       return action.payload;
