@@ -1,10 +1,33 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { Container, Navbar, Nav } from "react-bootstrap";
+import React, { useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
+import { Container, Navbar, Nav, Button } from "react-bootstrap";
+import { useDispatch } from "react-redux";
 
 import "./styles.scss";
+import decode from "jwt-decode";
+import { logOut } from "../../redux/authSlice";
 
 const Navigationbar = () => {
+  // const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
+  const dispatch = useDispatch();
+  const location = useLocation();
+
+  // const logout = () => {
+  //   dispatch(logOut());
+
+  //   setUser(null);
+  // };
+
+  // useEffect(() => {
+  //   const token = user?.token;
+  //   if (token) {
+  //     const decodedToken = decode(token);
+
+  //     if (decodedToken.exp * 1000 < new Date().getTime()) logout();
+  //   }
+  //   setUser(JSON.parse(localStorage.getItem("profile")));
+  // }, [location]);
+
   return (
     <Navbar
       collapseOnSelect
@@ -30,6 +53,13 @@ const Navigationbar = () => {
             <Nav.Link href="#pricing">Pricing</Nav.Link>
           </Nav>
         </Navbar.Collapse>
+        {/* {user ? (
+          <>
+            <Button color="warning" onClick={logout}>
+              Logout {user.result.name}
+            </Button>
+          </>
+        ) : null} */}
       </Container>
     </Navbar>
   );

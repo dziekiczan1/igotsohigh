@@ -1,20 +1,25 @@
 import React, { useEffect, useState } from "react";
 import { Col, Row, Button, Offcanvas, Card } from "react-bootstrap";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 import { getNotes } from "../../redux/noteSlice";
 import Notes from "../Notes/Notes";
 import Forma from "../Form/Form";
 import Auth from "../Auth/Auth";
+import Profile from "../Profile/Profile";
 import "./Home.scss";
 
 const Home = () => {
   const dispatch = useDispatch();
   const [currentId, setCurrentId] = useState();
   const [show, setShow] = useState(false);
+  const user = JSON.parse(localStorage.getItem("profile"));
 
   const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const handleShow = () => {
+    setShow(true);
+  };
 
   useEffect(() => {
     dispatch(getNotes());
@@ -38,9 +43,9 @@ const Home = () => {
                 Share a weed story!
               </Button>
             </Card.Body>
+            {user ? <Profile /> : <Auth />}
           </Card>
         </Col>
-        <Auth />
         <Offcanvas
           show={show}
           onHide={handleClose}

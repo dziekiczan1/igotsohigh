@@ -1,19 +1,21 @@
 import { createSlice } from "@reduxjs/toolkit";
 import * as api from "../api";
 
-export const signin = (formData) => async (dispatch) => {
+export const signin = (formData, navigate) => async (dispatch) => {
   try {
     const { data } = await api.signIn(formData);
     dispatch(auth(data));
+    navigate("/");
   } catch (error) {
     console.log(error.message);
   }
 };
 
-export const signup = (formData) => async (dispatch) => {
+export const signup = (formData, navigate) => async (dispatch) => {
   try {
     const { data } = await api.signUp(formData);
     dispatch(auth(data));
+    navigate("/");
   } catch (error) {
     console.log(error.message);
   }
@@ -26,8 +28,8 @@ export const authSlice = createSlice({
   },
   reducers: {
     auth: (state, action) => {
-      localStorage.setItem("profile", JSON.stringify({ ...action?.data }));
-      return { ...state, authData: action?.data };
+      localStorage.setItem("profile", JSON.stringify({ ...action?.payload }));
+      return { ...state, authData: action?.payload };
     },
     logOut: (state, action) => {
       localStorage.clear();
