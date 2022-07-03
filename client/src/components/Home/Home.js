@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Col, Row, Button, Offcanvas, Card } from "react-bootstrap";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 import { getNotes } from "../../redux/noteSlice";
 import Notes from "../Notes/Notes";
@@ -14,16 +14,20 @@ const Home = () => {
   const dispatch = useDispatch();
   const [currentId, setCurrentId] = useState();
   const [show, setShow] = useState(false);
-  const user = JSON.parse(localStorage.getItem("profile"));
+
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
+  const location = useLocation();
 
   const handleClose = () => setShow(false);
-  const handleShow = () => {
-    setShow(true);
-  };
+  const handleShow = () => setShow(true);
 
   useEffect(() => {
     dispatch(getNotes());
   }, [currentId, dispatch]);
+
+  useEffect(() => {
+    setUser(JSON.parse(localStorage.getItem("profile")));
+  }, [location]);
 
   return (
     <Row className="p-0">
@@ -35,7 +39,7 @@ const Home = () => {
           <Card bg="dark" text="white" border="none">
             <Card.Body className="m-2 py-0 sidebar">
               <Button
-                variant="outline-success"
+                variant="outline-warning"
                 size="lg"
                 onClick={handleShow}
                 className="button"
@@ -43,9 +47,15 @@ const Home = () => {
                 Share a weed story!
               </Button>
             </Card.Body>
-            {user ? <Profile /> : <Auth />}
           </Card>
         </Col>
+        {user ? (
+          <Col className="p-3">
+            <Profile />
+          </Col>
+        ) : (
+          <Auth />
+        )}
         <Offcanvas
           show={show}
           onHide={handleClose}

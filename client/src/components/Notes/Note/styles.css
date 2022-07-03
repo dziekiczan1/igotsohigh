@@ -1,16 +1,17 @@
-.klasa {
+.note-footer {
   display: flex;
+  justify-content: space-between;
+  align-items: center;
   flex-direction: row;
-  gap: 1rem;
   padding: 0.2rem;
+  background: none;
 }
 
 .card-noteCard {
-  box-shadow: 0 0 0.8em rgb(3, 99, 40);
   background: linear-gradient(
     to right top,
-    rgba(10, 10, 10, 0.25),
-    rgba(15, 235, 99, 0.25)
+    rgba(10, 10, 10, 0.65),
+    rgba(15, 235, 99, 0.45)
   );
   backdrop-filter: blur(8px);
 }

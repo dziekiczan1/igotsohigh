@@ -17,10 +17,10 @@ const Forma = ({ currentId, setCurrentId }) => {
     currentId ? state.notes.find((note) => note._id === currentId) : null
   ); // if we have currentId we want to find a note with the same id as currentId
   const [noteData, setNoteData] = useState({
-    creator: "",
     message: "",
   });
   const dispatch = useDispatch();
+  const user = JSON.parse(localStorage.getItem("profile"));
 
   useEffect(() => {
     if (note) setNoteData(note);
@@ -30,9 +30,11 @@ const Forma = ({ currentId, setCurrentId }) => {
     e.preventDefault();
 
     if (currentId) {
-      dispatch(updateNote(currentId, noteData));
+      dispatch(
+        updateNote(currentId, { ...noteData, name: user?.result?.name })
+      );
     } else {
-      dispatch(createNote(noteData));
+      dispatch(createNote({ ...noteData, name: user?.result?.name }));
     }
 
     clear();
@@ -40,10 +42,17 @@ const Forma = ({ currentId, setCurrentId }) => {
   const clear = () => {
     setCurrentId(null);
     setNoteData({
-      creator: "",
       message: "",
     });
   };
+
+  if (!user?.result?.name) {
+    return (
+      <h2 className="text-warning" style={{ textAlign: "center" }}>
+        Please Sign In to share a (s)WEED story.
+      </h2>
+    );
+  }
   return (
     <ThemeProvider theme={Theme}>
       <Box
@@ -55,25 +64,12 @@ const Forma = ({ currentId, setCurrentId }) => {
       >
         <TextField
           className="textfield"
-          sx={{ margin: "1rem 0" }}
-          name="creator"
-          label="Creator"
-          fullWidth
-          variant="outlined"
-          multiline
-          value={noteData.creator}
-          onChange={(e) =>
-            setNoteData({ ...noteData, creator: e.target.value })
-          }
-        />
-        <TextField
-          className="textfield"
           name="message"
           label="Message"
           fullWidth
           variant="outlined"
           multiline
-          rows={4}
+          rows={8}
           value={noteData.message}
           onChange={(e) =>
             setNoteData({ ...noteData, message: e.target.value })
