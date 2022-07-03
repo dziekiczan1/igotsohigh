@@ -11,6 +11,12 @@ const Note = ({ note, setCurrentId, handleShow }) => {
   return (
     <>
       <Card bg="transparent" border="warning" className="card-noteCard">
+        <Card.Header className="d-flex justify-content-between text-white">
+          <small>
+            by&nbsp;<strong className="me-auto">{note.creator}</strong>
+          </small>
+          <small>{moment(note.createdAt).fromNow()}</small>
+        </Card.Header>
         <Card.Body>
           <Card.Title className="text-success">
             I got so high that...
@@ -37,10 +43,6 @@ const Note = ({ note, setCurrentId, handleShow }) => {
             </Button>
           </div>
         </Card.Body>
-        <Card.Footer className="d-flex text-white">
-          by&nbsp;<strong className="me-auto">{note.creator}</strong>
-          <small>{moment(note.createdAt).fromNow()}</small>
-        </Card.Footer>
       </Card>
     </>
   );

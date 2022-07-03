@@ -8,7 +8,6 @@ const Input = ({
   label,
   handleChange,
   name,
-  half,
   autoFocus,
   type,
   handleShowPassword,
