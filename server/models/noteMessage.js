@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 const noteSchema = mongoose.Schema({
   message: String,
   creator: String,
+  name: String,
   comments: { type: [String], default: [] },
   createdAt: {
     type: Date,

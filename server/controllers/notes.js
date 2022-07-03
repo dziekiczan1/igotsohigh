@@ -12,7 +12,11 @@ export const getNotes = async (req, res) => {
 
 export const createNote = async (req, res) => {
   const note = req.body;
-  const newNote = new NoteMessage(note);
+  const newNote = new NoteMessage({
+    ...note,
+    creator: req.userId,
+    createdAt: new Date().toISOString(),
+  });
   try {
     await newNote.save();
     res.status(201).json(newNote);
