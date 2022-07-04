@@ -1,11 +1,17 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
 import { Container, Navbar } from "react-bootstrap";
 
 import "./styles.scss";
 import logo from "../../images/logo.png";
 
 const Navigationbar = () => {
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
+  const location = useLocation();
+
+  useEffect(() => {
+    setUser(JSON.parse(localStorage.getItem("profile")));
+  }, [location]);
   return (
     <Navbar
       collapseOnSelect

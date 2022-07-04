@@ -15,7 +15,7 @@ const Home = () => {
   const [currentId, setCurrentId] = useState();
   const [show, setShow] = useState(false);
 
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
+  const user = JSON.parse(localStorage.getItem("profile"));
   const location = useLocation();
 
   const handleClose = () => setShow(false);
@@ -23,11 +23,7 @@ const Home = () => {
 
   useEffect(() => {
     dispatch(getNotes());
-  }, [currentId, dispatch]);
-
-  useEffect(() => {
-    setUser(JSON.parse(localStorage.getItem("profile")));
-  }, [location]);
+  }, [currentId, dispatch, location]);
 
   return (
     <Row className="p-0">
