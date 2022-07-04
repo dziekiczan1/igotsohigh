@@ -5,11 +5,11 @@ import { Container, Col, Row } from "react-bootstrap";
 import Note from "./Note/Note";
 
 const Notes = ({ setCurrentId, handleShow }) => {
-  const notes = useSelector((state) => state.notes);
+  const { notes } = useSelector((state) => state.notes);
 
   return (
     <>
-      {!notes.length ? (
+      {!notes?.length ? (
         <div>There is nothing to show</div>
       ) : (
         notes.map((note, i) => {

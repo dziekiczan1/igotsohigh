@@ -2,9 +2,23 @@ import mongoose from "mongoose";
 import NoteMessage from "../models/noteMessage.js";
 
 export const getNotes = async (req, res) => {
+  const { page } = req.query;
   try {
-    const noteMessages = await NoteMessage.find();
-    res.status(200).json(noteMessages);
+    const LIMIT = 2;
+    // (Number(page)) - we have to convert page for number, because it comes on backend as a string
+    const startIndex = (Number(page) - 1) * LIMIT; // get start ubdex if every page
+    const total = await NoteMessage.countDocuments({});
+
+    const notes = await NoteMessage.find()
+      .sort({ _id: -1 })
+      .limit(LIMIT)
+      .skip(startIndex);
+
+    res.status(200).json({
+      data: notes,
+      currentPage: Number(page),
+      numberOfPages: Math.ceil(total / LIMIT),
+    });
   } catch (error) {
     res.status(404).json({ message: error.message });
   }

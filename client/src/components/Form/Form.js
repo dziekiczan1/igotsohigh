@@ -14,7 +14,7 @@ const Theme = createTheme({
 
 const Forma = ({ currentId, setCurrentId }) => {
   const note = useSelector((state) =>
-    currentId ? state.notes.find((note) => note._id === currentId) : null
+    currentId ? state.notes.notes.find((n) => n._id === currentId) : null
   ); // if we have currentId we want to find a note with the same id as currentId
   const [noteData, setNoteData] = useState({
     message: "",
