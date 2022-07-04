@@ -1,29 +1,29 @@
 import React, { useEffect, useState } from "react";
 import { Col, Row, Button, Offcanvas, Card } from "react-bootstrap";
-import { useDispatch } from "react-redux";
 import { useLocation } from "react-router-dom";
 
-import { getNotes } from "../../redux/noteSlice";
 import Notes from "../Notes/Notes";
 import Forma from "../Form/Form";
 import Auth from "../Auth/Auth";
 import Profile from "../Profile/Profile";
+import Pagination from "../Pagination";
 import "./Home.scss";
 
+function useQuery() {
+  return new URLSearchParams(useLocation().search);
+}
+
 const Home = () => {
-  const dispatch = useDispatch();
   const [currentId, setCurrentId] = useState();
   const [show, setShow] = useState(false);
-
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
+
   const location = useLocation();
+  const query = useQuery();
+  const page = query.get("page") || 1;
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-
-  useEffect(() => {
-    dispatch(getNotes());
-  }, [currentId, dispatch]);
 
   useEffect(() => {
     setUser(JSON.parse(localStorage.getItem("profile")));
@@ -47,6 +47,7 @@ const Home = () => {
                 Share a weed story!
               </Button>
             </Card.Body>
+            <Pagination page={page} />
           </Card>
         </Col>
         {user ? (
