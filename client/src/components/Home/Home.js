@@ -37,7 +37,7 @@ const Home = () => {
       <Col sm={4} className="p-1">
         <Col>
           <Card bg="dark" text="white" border="none">
-            <Card.Body className="m-2 py-0 sidebar">
+            <Card.Body className="m-2 py-1 sidebar">
               <Button
                 variant="outline-warning"
                 size="lg"

@@ -18,7 +18,10 @@ const Note = ({ note, setCurrentId, handleShow }) => {
         border="warning"
         className="card-noteCard border-bottom"
       >
-        <Card.Header className="d-flex justify-content-end text-white">
+        <Card.Header className="d-flex justify-content-between text-white">
+          <h5 className="d-none d-sm-block text-warning">
+            I got so high that...
+          </h5>
           <small>
             by&nbsp;<strong className="me-auto">{note.name}</strong>&nbsp;
             {moment(note.createdAt).fromNow()}
@@ -26,7 +29,7 @@ const Note = ({ note, setCurrentId, handleShow }) => {
         </Card.Header>
         <Card.Body>
           <Card.Text className="text-white">{note.message}</Card.Text>
-          <Card.Footer className="note-footer">
+          <div className="note-footer">
             <div className="footer-comments">
               <small className="text-warning">Comments: 12</small>
             </div>
@@ -59,7 +62,7 @@ const Note = ({ note, setCurrentId, handleShow }) => {
                 />
               </div>
             ) : null}
-          </Card.Footer>
+          </div>
         </Card.Body>
       </Card>
     </>
