@@ -14,7 +14,7 @@ export const getNote = async (req, res) => {
 export const getNotes = async (req, res) => {
   const { page } = req.query;
   try {
-    const LIMIT = 2;
+    const LIMIT = 10;
     // (Number(page)) - we have to convert page for number, because it comes on backend as a string
     const startIndex = (Number(page) - 1) * LIMIT; // get start ubdex if every page
     const total = await NoteMessage.countDocuments({});

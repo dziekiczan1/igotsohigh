@@ -34,11 +34,15 @@ const Note = ({ note, setCurrentId, handleShow }) => {
 
         <Card.Body>
           <ButtonBase onClick={openNote}>
-            <Card.Text className="text-white">{note.message}</Card.Text>
+            <Card.Text className="text-white card-body-text">
+              {note.message.split(" ").slice(0, 60).join(" ")}...
+            </Card.Text>
           </ButtonBase>
           <div className="note-footer">
             <div className="footer-comments" onClick={openNote}>
-              <small className="text-warning">Comments: 12</small>
+              <small className="text-warning">
+                Comments: {note.comments.length}
+              </small>
             </div>
             {user?.result?._id === note?.creator ? (
               <div className="footer-icons">

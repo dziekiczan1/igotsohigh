@@ -16,6 +16,11 @@
   backdrop-filter: blur(8px);
 }
 
+.card-body-text {
+  display: flex;
+  text-align: left;
+}
+
 .card-title {
   @media screen and (max-width: 475px) {
     display: none;

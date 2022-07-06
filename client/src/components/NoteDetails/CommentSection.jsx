@@ -80,8 +80,8 @@ const CommentSection = ({ note }) => {
                 variant="subtitle2"
                 style={{ color: "#fff" }}
               >
-                <strong>{c}</strong>
-                {/* <small>{c.split(":")[1]}</small> */}
+                <strong>{c.split(": ")[0]}:</strong>
+                <small>{c.split(":")[1]}</small>
               </Typography>
             ))}
             <div ref={commentsRef} />
