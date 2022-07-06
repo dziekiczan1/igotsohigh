@@ -1,10 +1,24 @@
 import { createSlice } from "@reduxjs/toolkit";
 import * as api from "../api";
 
+export const getNote = (id) => async (dispatch) => {
+  const { data } = await api.fetchNote(id);
+  dispatch(fetchNote(data));
+};
+
 export const getNotes = (page) => async (dispatch) => {
-  const { data } = await api.fetchNotes(page);
-  console.log(data); // data is destructed from response.data
+  const { data } = await api.fetchNotes(page); // data is destructed from response.data
   dispatch(fetchAllNotes(data));
+};
+
+export const commentNote = (value, id) => async (dispatch) => {
+  try {
+    const { data } = await api.commentNote(value, id);
+    dispatch(comment(data));
+    return data.comments;
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 export const createNote = (note) => async (dispatch) => {
@@ -41,6 +55,9 @@ export const noteSlice = createSlice({
     notes: [],
   },
   reducers: {
+    fetchNote: (state, action) => {
+      return { ...state, note: action.payload };
+    },
     fetchAllNotes: (state, action) => {
       return {
         ...state,
@@ -66,9 +83,21 @@ export const noteSlice = createSlice({
         notes: state.notes.filter((note) => note._id !== action.payload),
       }; // we keep all the notes except the one where ID is equal to action.payload
     },
+    comment: (state, action) => {
+      return {
+        ...state,
+        notes: state.notes.map((note) => {
+          if (note._id !== action.payload) {
+            return action.payload;
+          }
+          return note;
+        }),
+      };
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { fetchAllNotes, create, update, remove } = noteSlice.actions;
+export const { fetchNote, fetchAllNotes, create, update, remove, comment } =
+  noteSlice.actions;
 export default noteSlice.reducer;

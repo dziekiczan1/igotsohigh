@@ -1,6 +1,16 @@
 import mongoose from "mongoose";
 import NoteMessage from "../models/noteMessage.js";
 
+export const getNote = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const note = await NoteMessage.findById(id);
+    res.status(200).json(note);
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+};
+
 export const getNotes = async (req, res) => {
   const { page } = req.query;
   try {
@@ -37,6 +47,21 @@ export const createNote = async (req, res) => {
   } catch (error) {
     res.status(409).json({ message: error.message });
   }
+};
+
+export const commentNote = async (req, res) => {
+  const { id } = req.params;
+  const { value } = req.body;
+
+  const note = await NoteMessage.findById(id);
+
+  note.comments.push(value);
+
+  const updatedNote = await NoteMessage.findByIdAndUpdate(id, note, {
+    new: true,
+  });
+
+  res.json(updatedNote);
 };
 
 export const updateNote = async (req, res) => {

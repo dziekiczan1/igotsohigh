@@ -4,6 +4,8 @@ import { Card } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
+import { ButtonBase } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 import { deleteNote } from "../../../redux/noteSlice";
 import "./styles.css";
@@ -11,13 +13,15 @@ import "./styles.css";
 const Note = ({ note, setCurrentId, handleShow }) => {
   const dispatch = useDispatch();
   const user = JSON.parse(localStorage.getItem("profile"));
+  const navigate = useNavigate();
+
+  const openNote = () => {
+    navigate(`/notes/${note._id}`);
+  };
+
   return (
     <>
-      <Card
-        bg="transparent"
-        border="warning"
-        className="card-noteCard border-bottom"
-      >
+      <Card bg="transparent" border="warning" className="card-noteCard">
         <Card.Header className="d-flex justify-content-between text-white">
           <h5 className="d-none d-sm-block text-warning">
             I got so high that...
@@ -27,10 +31,13 @@ const Note = ({ note, setCurrentId, handleShow }) => {
             {moment(note.createdAt).fromNow()}
           </small>
         </Card.Header>
+
         <Card.Body>
-          <Card.Text className="text-white">{note.message}</Card.Text>
+          <ButtonBase onClick={openNote}>
+            <Card.Text className="text-white">{note.message}</Card.Text>
+          </ButtonBase>
           <div className="note-footer">
-            <div className="footer-comments">
+            <div className="footer-comments" onClick={openNote}>
               <small className="text-warning">Comments: 12</small>
             </div>
             {user?.result?._id === note?.creator ? (

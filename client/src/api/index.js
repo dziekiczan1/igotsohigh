@@ -14,8 +14,11 @@ API.interceptors.request.use((req) => {
   return req;
 });
 
+export const fetchNote = (id) => API.get(`notes/${id}`);
 export const fetchNotes = (page) => API.get(`/notes?page=${page}`);
 export const createNote = (newNote) => API.post("/notes", newNote);
+export const commentNote = (value, id) =>
+  API.post(`notes/${id}/commentNote`, { value });
 export const updateNote = (id, updatedNote) =>
   API.patch(`notes/${id}`, updatedNote);
 export const deleteNote = (id) => API.delete(`notes/${id}`);
