@@ -2,7 +2,7 @@
 
 ### [Live Site](https://igotsohigh.netlify.app/)
 
-![I got so high that](https://piotr.rzadkowolski.dev/assets/proj10.jpg)
+![I got so high that](https://piotr.rzadkowolski.dev/assets/proj10.webp)
 
 ## Introduction
 This is a code repository for the **I got so high that...** project. 
