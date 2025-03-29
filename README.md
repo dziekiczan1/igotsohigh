@@ -1,6 +1,6 @@
 # I got so high that...
 
-### [Live Site](https://igotsohigh.netlify.app/)
+### [Live Site](https://sohigh.erzet.dev/)
 
 ![I got so high that](https://piotr.rzadkowolski.dev/assets/proj10.webp)
 
